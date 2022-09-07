@@ -53,6 +53,7 @@ class SetSamplerType(Action):
 # This dictionary assigns the given texture type names (found in suffixes, for ex. T_TextureName_D - D means it's a Diffuse texture)
 # to the different actions that should be performed to properly set it up in the material.
 ##
+# VIDEO REFERENCE: https://youtu.be/mwc4NsB70lo?t=7493
 
 actions = {
     'DA': [
@@ -90,6 +91,21 @@ actions = {
     ],
     'E': [
         CreateConnectionScaled('RGB', unreal.MaterialProperty.MP_EMISSIVE_COLOR, 15)
+    ],
+    'diffuseOriginal': [
+        CreateConnection('RGB', unreal.MaterialProperty.MP_BASE_COLOR)
+    ],
+    'ao': [
+        CreateConnection('R', unreal.MaterialProperty.MP_AMBIENT_OCCLUSION),
+        SetSamplerType(unreal.MaterialSamplerType.SAMPLERTYPE_MASKS)
+    ],
+    'metallic': [
+        CreateConnection('R', unreal.MaterialProperty.MP_METALLIC),
+        SetSamplerType(unreal.MaterialSamplerType.SAMPLERTYPE_MASKS)
+    ],
+    'normal': [
+        CreateConnection('RGB', unreal.MaterialProperty.MP_NORMAL),
+        SetSamplerType(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL)
     ],
 }
 
